@@ -19,6 +19,7 @@ Rectangle {
     property int  combiAngle: 0
 
     onRadianShowChanged: {
+        bodard.scale = 1
         combiAngle = 0
         swing.stop()
         valuechange.stop()
@@ -36,12 +37,6 @@ Rectangle {
             duration: 1000 }
         ScriptAction {
             script: {
-                if (1 === curnumerator && 1 === bodard.scale) {
-                    bodard.scale = 1.01
-                } else {
-                    bodard.scale = 1
-                }
-
                 if (strongFlag > curnumerator) {
                     strongFlag = 0
                 }
@@ -86,6 +81,31 @@ Rectangle {
             }
         }
     }
+    SequentialAnimation {
+        id: bodardOne
+        running: 1 === curnumerator
+        loops: Animation.Infinite
+        PauseAnimation {
+            id: pausetime3
+            duration: pausetim.duration }
+    ScriptAction {
+        script: {
+//            bodard.scale = 1.01;
+            console.log(1)
+        }
+    }
+    PauseAnimation {
+        id: pausetime23
+        duration: pausetim.duration }
+    ScriptAction {
+        script: {
+//            bodard.scale = 1;
+            console.log(2)
+        }
+    }
+
+    }
+
     Ringboard {
         id:bodard
         x: 401
@@ -415,10 +435,15 @@ Rectangle {
             id: dorpShowArea
             anchors.fill: parent
             onClicked: {
+                if (swing.running === true) {
                 swing.stop()
                 valuechange.stop()
                 combiAngle = 0
                 root.value = radianShow
+                } else {
+                    swing.start()
+                    valuechange.start()
+                }
             }
         }
         Item {
