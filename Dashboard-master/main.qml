@@ -121,7 +121,6 @@ Rectangle {
         rotation: root.value
     }
 
-
     Text {
         id: beat
         x: 280
@@ -138,6 +137,7 @@ Rectangle {
         color: "white"
         font.pixelSize: 40
     }
+
     ListModel {
         id: numeratorMode
     }
@@ -227,6 +227,7 @@ Rectangle {
             }
         }
     }
+
     Timer {
         id: showtimer
         running: true
@@ -268,6 +269,11 @@ Rectangle {
                 }
                 break;
             case 8:
+                if(curnumerator === 3){
+                    radianShow = 120;
+                } else if(curnumerator === 6){
+                    radianShow = 60;
+                }
                 break;
             default:
                 break;
