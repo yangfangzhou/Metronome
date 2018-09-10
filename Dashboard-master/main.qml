@@ -322,7 +322,7 @@ Rectangle {
 
     Text {
         id: language
-        anchors.horizontalCenter: fruit.horizontalCenter
+        anchors.horizontalCenter: speedName.horizontalCenter
         y: 0
         text: qsTr("italiana") + bodard.emptystring
         color: "white"
@@ -341,32 +341,32 @@ Rectangle {
         }
         onTextChanged: {
             if (languageInt) {
-                for (var i =0 ; i< fruitModel.count;i++){
-                    fruitModel.setProperty(i,"hznumText1Show",qsTr(fruitModel.get(i).hznumText1Show))
+                for (var i =0 ; i< speedNameModel.count;i++){
+                    speedNameModel.setProperty(i,"hznumText1Show",qsTr(speedNameModel.get(i).hznumText1Show))
                 }
             } else {
-                fruitModelReflash();
+                speedNameModelReflash();
             }
         }
     }
 
 
     Item {
-        id: fruit
+        id: speedName
         x:100
         y:100
         width: 100
         height: 300
         Component.onCompleted:{
-            fruitModelReflash();
+            speedNameModelReflash();
         }
 
         ListModel {
-            id: fruitModel
+            id: speedNameModel
 
         }
         Component {
-            id: fruitDelegate
+            id: speedNameDelegate
             Column {
                 x:0
                 Rectangle
@@ -396,8 +396,8 @@ Rectangle {
         }
         ListView {
             anchors.fill: parent
-            model: fruitModel
-            delegate: fruitDelegate
+            model: speedNameModel
+            delegate: speedNameDelegate
         }
     }
 
@@ -526,16 +526,16 @@ Rectangle {
         }
     }
 
-    function fruitModelReflash (){
-        fruitModel.clear()
-        fruitModel.append({"hznumText1Show":qsTr("largo"),"hznumText1contentY": "0"})
-        fruitModel.append({"hznumText1Show":qsTr("lento"),"hznumText1contentY": "1200"})
-        fruitModel.append({"hznumText1Show":qsTr("adagio"),"hznumText1contentY": "1600"})
-        fruitModel.append({"hznumText1Show":qsTr("andante"),"hznumText1contentY": "2600"})
-        fruitModel.append({"hznumText1Show":qsTr("andantino"),"hznumText1contentY": "2900"})
-        fruitModel.append({"hznumText1Show":qsTr("moderato"),"hznumText1contentY": "4800"})
-        fruitModel.append({"hznumText1Show":qsTr("allegretto"),"hznumText1contentY": "6800"})
-        fruitModel.append({"hznumText1Show":qsTr("allegro"),"hznumText1contentY": "9200"})
-        fruitModel.append({"hznumText1Show":qsTr("presto"),"hznumText1contentY": "14400"})
+    function speedNameModelReflash (){
+        speedNameModel.clear()
+        speedNameModel.append({"hznumText1Show":qsTr("largo"),"hznumText1contentY": "0"})
+        speedNameModel.append({"hznumText1Show":qsTr("lento"),"hznumText1contentY": "1200"})
+        speedNameModel.append({"hznumText1Show":qsTr("adagio"),"hznumText1contentY": "1600"})
+        speedNameModel.append({"hznumText1Show":qsTr("andante"),"hznumText1contentY": "2600"})
+        speedNameModel.append({"hznumText1Show":qsTr("andantino"),"hznumText1contentY": "2900"})
+        speedNameModel.append({"hznumText1Show":qsTr("moderato"),"hznumText1contentY": "4800"})
+        speedNameModel.append({"hznumText1Show":qsTr("allegretto"),"hznumText1contentY": "6800"})
+        speedNameModel.append({"hznumText1Show":qsTr("allegro"),"hznumText1contentY": "9200"})
+        speedNameModel.append({"hznumText1Show":qsTr("presto"),"hznumText1contentY": "14400"})
     }
 }
