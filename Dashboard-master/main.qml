@@ -19,6 +19,7 @@ Rectangle {
     property int  combiAngle: 0
 
     onRadianShowChanged: {
+        bodard.scale = 1
         combiAngle = 0
         swing.stop()
         valuechange.stop()
@@ -36,12 +37,6 @@ Rectangle {
             duration: 1000 }
         ScriptAction {
             script: {
-                if (1 === curnumerator && 1 === bodard.scale) {
-                    bodard.scale = 1.01
-                } else {
-                    bodard.scale = 1
-                }
-
                 if (strongFlag > curnumerator) {
                     strongFlag = 0
                 }
@@ -69,7 +64,7 @@ Rectangle {
         loops: Animation.Infinite
         PauseAnimation {
             id: pausetim1
-            duration: pausetim.duration
+            duration: pausetim.duration - 10
         }
         ScriptAction {
             script: {
@@ -78,7 +73,7 @@ Rectangle {
         }
         PauseAnimation {
             id: pausetim2
-            duration: pausetim.duration
+            duration: pausetim.duration - 10
         }
         ScriptAction {
             script: {
@@ -86,6 +81,49 @@ Rectangle {
             }
         }
     }
+    SequentialAnimation {
+        id: bodardOne
+        running: 1 === curnumerator?swing.running : false
+        loops: Animation.Infinite
+        PauseAnimation {
+            id: pausetime3
+            duration: pausetim.duration - 200
+        }
+
+        NumberAnimation {
+            target: bodard
+            property: "scale"
+            to:1.01
+            duration: 150
+            easing.type: Easing.InOutQuad
+        }
+        NumberAnimation {
+            target: bodard
+            property: "scale"
+            to:1
+            duration: 50
+            easing.type: Easing.InOutQuad
+        }
+        PauseAnimation {
+            id: pausetime23
+            duration: pausetim.duration - 200
+        }
+        NumberAnimation {
+            target: bodard
+            property: "scale"
+            to:1.01
+            duration: 150
+            easing.type: Easing.InOutQuad
+        }
+        NumberAnimation {
+            target: bodard
+            property: "scale"
+            to:1
+            duration: 50
+            easing.type: Easing.InOutQuad
+        }
+    }
+
     Ringboard {
         id:bodard
         x: 401
@@ -415,10 +453,15 @@ Rectangle {
             id: dorpShowArea
             anchors.fill: parent
             onClicked: {
-                swing.stop()
-                valuechange.stop()
-                combiAngle = 0
-                root.value = radianShow
+                if (swing.running === true) {
+                    swing.stop()
+                    valuechange.stop()
+                    combiAngle = 0
+                    root.value = radianShow
+                } else {
+                    swing.start()
+                    valuechange.start()
+                }
             }
         }
         Item {
