@@ -7,10 +7,26 @@ Rectangle {
     height: 400
     color: "black"
 
-    property int value: 90
+    property int radianShow: 0
+    property int value: radianShow
     property string cur: "10"  //88
     //    property int waitDuration: 1000 /*(60 / Number(cur) * 1000).toFixed(0)*/
     Behavior on value { SpringAnimation { spring: 5.0; damping: 0.5; epsilon: 0.8 } }
+    property int strongFlag: 0
+    property int curnumerator: 0
+    property int curdenominator: 0
+    property int languageInt: 0
+    property int  combiAngle: 0
+
+    onRadianShowChanged: {
+        combiAngle = 0
+        swing.stop()
+        valuechange.stop()
+        root.value = radianShow
+        valuechange.start()
+        swing.start()
+
+    }
     SequentialAnimation {
         id: valuechange
         running: true
@@ -20,11 +36,56 @@ Rectangle {
             duration: 1000 }
         ScriptAction {
             script: {
-                root.value += 120;
+                if (1 === curnumerator && 1 === bodard.scale) {
+                    bodard.scale = 1.01
+                } else {
+                    bodard.scale = 1
+                }
+
+                if (strongFlag > curnumerator) {
+                    strongFlag = 0
+                }
+
+                if(0 === strongFlag)
+                {
+                    bodard.soundStrongPlay();
+                    strongFlag += 1;
+                } else if(strongFlag > 0 && strongFlag < curnumerator) {
+                    bodard.soundWeakPlay();
+                    strongFlag += 1;
+                } else if(strongFlag === curnumerator){
+                    bodard.soundStrongPlay();
+                    strongFlag = 1;
+                }
+
+                root.value += radianShow;
             }
         }
     }
-
+    Behavior on combiAngle { SpringAnimation { spring: 5.0; damping: 0.5; epsilon: 0.8 } }
+    SequentialAnimation {
+        id: swing
+        running: false
+        loops: Animation.Infinite
+        PauseAnimation {
+            id: pausetim1
+            duration: pausetim.duration
+        }
+        ScriptAction {
+            script: {
+                combiAngle = 30;
+            }
+        }
+        PauseAnimation {
+            id: pausetim2
+            duration: pausetim.duration
+        }
+        ScriptAction {
+            script: {
+                combiAngle = -30;
+            }
+        }
+    }
     Ringboard {
         id:bodard
         x: 401
@@ -36,11 +97,12 @@ Rectangle {
         spanAngle: -360
         radiusInner: 130
         radiusOuter: 180
-        roundConer: false
+        //        roundConer: false
         gradient: Ringboard.LinearGradient
     }
 
     Item {
+        id: boardlightrotation
         x: 401
         y: 0
         width: 400
@@ -50,15 +112,89 @@ Rectangle {
             width: 400
             height: 400
             startAngle: 270
-            spanAngle: -240
+            spanAngle: radianShow - 360
             radiusInner: 130
             radiusOuter: 180
-            roundConer: false
+            //            roundConer: false
             gradient: Ringboard.LinearGradientlight
         }
         rotation: root.value
     }
 
+
+    Text {
+        id: beat
+        x: 280
+        y: 0
+        text: qsTr("battere") + bodard.emptystring
+        color: "white"
+        font.pixelSize: 50
+    }
+    Text {
+        id: separator
+        x: 318
+        y: 130
+        text: "/"
+        color: "white"
+        font.pixelSize: 40
+    }
+    ListModel {
+        id: numeratorMode
+    }
+    ListView {
+        id: numeratorView
+        x: 280
+        y: 100
+        width: 50
+        height: 100
+        clip: true
+        model: numeratorMode
+        snapMode: ListView.SnapToItem
+        delegate:  Rectangle {
+            width: 50
+            height: 100
+            color: "transparent"
+            Text {
+                text: listtext
+                color: "white"
+                anchors.centerIn: parent
+                font.pixelSize: 50
+            }
+        }
+        onCurrentIndexChanged: {
+        }
+        onContentYChanged: {
+        }
+    }
+
+    ListModel {
+        id: denominatorMode
+    }
+    ListView {
+        id: denominatorView
+        x: 330
+        y: 100
+        width: 50
+        height: 100
+        clip: true
+        model: denominatorMode
+        snapMode: ListView.SnapToItem
+        delegate:  Rectangle {
+            width: 50
+            height: 100
+            color: "transparent"
+            Text {
+                text: listtext
+                color: "white"
+                anchors.centerIn: parent
+                font.pixelSize: 50
+            }
+        }
+        onCurrentIndexChanged: {
+        }
+        onContentYChanged: {
+        }
+    }
 
     ListModel {
         id:beatmode
@@ -82,8 +218,6 @@ Rectangle {
                 font.pixelSize: 50
             }
         }
-        onCurrentIndexChanged: {
-        }
         onContentYChanged: {
             if(!dragArea.pressed) {
                 rectM.y = beatmode.get(beatview.contentY / 100).listtext
@@ -93,12 +227,6 @@ Rectangle {
             }
         }
     }
-    Component.onCompleted: {
-        for(var i = 40; i <= 200 ;i++)
-        {
-            beatmode.append({"listtext":i})
-        }
-    }
     Timer {
         id: showtimer
         running: true
@@ -106,19 +234,48 @@ Rectangle {
         interval:  200
         onTriggered: {
             if (!beatview.moving){
-                valuechange1.stop()
+                swing.stop()
                 valuechange.stop()
-                root.value = 120
+                combiAngle = 0
+                root.value = radianShow
                 cur = beatmode.get(beatview.contentY / 100).listtext
                 pausetim.duration = (60 / Number(cur) * 1000).toFixed(0)
                 valuechange.start()
-                valuechange1.start()
+                swing.start()
             }
             showtimer.running = false
         }
     }
 
-    property int languageInt: 0
+    Timer {
+        id: adjusttimer
+        running: true
+        repeat: true
+        interval:  200
+        onTriggered: {
+            curnumerator = Number(numeratorMode.get(numeratorView.contentY / 100).listtext)
+            curdenominator = Number(denominatorMode.get(denominatorView.contentY / 100).listtext)
+            switch (curdenominator) {
+            case 4:
+                if(curnumerator === 1){
+                    radianShow = 360;
+                } else if(curnumerator === 2){
+                    radianShow = 180;
+                } else if(curnumerator === 3){
+                    radianShow = 120;
+                } else if(curnumerator === 4){
+                    radianShow = 90;
+                }
+                break;
+            case 8:
+                break;
+            default:
+                break;
+            }
+        }
+    }
+
+
     Text {
         id: language
         anchors.horizontalCenter: fruit.horizontalCenter
@@ -242,7 +399,6 @@ Rectangle {
             }
         }
     }
-    property int  combiAngle: 0
     DropArea {
         id: dorpShow
         x:900
@@ -253,9 +409,10 @@ Rectangle {
             id: dorpShowArea
             anchors.fill: parent
             onClicked: {
-                valuechange1.stop()
+                swing.stop()
                 valuechange.stop()
-                    combiAngle = 0
+                combiAngle = 0
+                root.value = radianShow
             }
         }
         Item {
@@ -280,11 +437,11 @@ Rectangle {
                     }
                     onYChanged: {
                         if(dragArea.pressed) {
-                        valuechange1.stop()
-                        valuechange.stop()
-                        beatview.contentY =  (0.61538 * y).toFixed(0) * 100
-                        valuechange1.start()
-                        valuechange.start()
+                            swing.stop()
+                            valuechange.stop()
+                            beatview.contentY =  (0.61538 * y).toFixed(0) * 100
+                            swing.start()
+                            valuechange.start()
                         }
                     }
 
@@ -303,27 +460,19 @@ Rectangle {
             }
         }
     }
-    Behavior on combiAngle { SpringAnimation { spring: 5.0; damping: 0.5; epsilon: 0.8 } }
-    SequentialAnimation {
-        id: valuechange1
-        running: false
-        loops: Animation.Infinite
-        PauseAnimation {
-            id: pausetim1
-            duration: pausetim.duration
+
+    Component.onCompleted: {
+        for(var i = 40; i <= 200 ;i++)
+        {
+            beatmode.append({"listtext":i})
         }
-        ScriptAction {
-            script: {
-                combiAngle = 30;
+        for(var i = 1; i <= 16 ;i++)
+        {
+            if (i != 5 && i != 7 && i <9){
+                numeratorMode.append({"listtext":i})
             }
-        }
-        PauseAnimation {
-            id: pausetim2
-            duration: pausetim.duration
-        }
-        ScriptAction {
-            script: {
-                combiAngle = -30;
+            if (i == 4 || i == 8 || i == 16){
+                denominatorMode.append({"listtext":i})
             }
         }
     }

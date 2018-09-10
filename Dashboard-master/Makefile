@@ -221,6 +221,7 @@ Makefile: Dashboard.pro C:/Qt/Qt5.8.0/5.8/mingw53_32/mkspecs/win32-g++/qmake.con
 		Dashboard.pro \
 		C:/Qt/Qt5.8.0/5.8/mingw53_32/lib/qtmain.prl \
 		C:/Qt/Qt5.8.0/5.8/mingw53_32/lib/Qt5Quick.prl \
+		C:/Qt/Qt5.8.0/5.8/mingw53_32/lib/Qt5Multimedia.prl \
 		C:/Qt/Qt5.8.0/5.8/mingw53_32/lib/Qt5Gui.prl \
 		C:/Qt/Qt5.8.0/5.8/mingw53_32/lib/Qt5Qml.prl \
 		C:/Qt/Qt5.8.0/5.8/mingw53_32/lib/Qt5Network.prl \
@@ -388,6 +389,7 @@ C:/Qt/Qt5.8.0/5.8/mingw53_32/mkspecs/features/lex.prf:
 Dashboard.pro:
 C:/Qt/Qt5.8.0/5.8/mingw53_32/lib/qtmain.prl:
 C:/Qt/Qt5.8.0/5.8/mingw53_32/lib/Qt5Quick.prl:
+C:/Qt/Qt5.8.0/5.8/mingw53_32/lib/Qt5Multimedia.prl:
 C:/Qt/Qt5.8.0/5.8/mingw53_32/lib/Qt5Gui.prl:
 C:/Qt/Qt5.8.0/5.8/mingw53_32/lib/Qt5Qml.prl:
 C:/Qt/Qt5.8.0/5.8/mingw53_32/lib/Qt5Network.prl:

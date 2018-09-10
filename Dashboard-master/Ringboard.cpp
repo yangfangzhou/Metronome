@@ -5,6 +5,8 @@
 #include <QConicalGradient>
 #include <QTranslator>
 Ringboard::Ringboard() {
+    soundStrong = new QSound(":/strongS.wav", this);
+    soundWeak = new QSound(":/weakS.wav", this);
     mEmptystring = "";
     connect(&mTimer, &QTimer::timeout, this, &Ringboard::timeoutSlot);
     mTimer.start(1000 / 60);
@@ -38,15 +40,15 @@ void Ringboard::paint(QPainter *painter) {
     path.arcTo(cx - radiusOuter(), cy - radiusOuter(),
                radiusOuter() * 2, radiusOuter() * 2,
                startAngle(), spanAngle() );
-//    if (roundConer()) {
-//        //外弧到内弧的圆角
-//        auto radius = (radiusOuter() - radiusInner()) / 2;
-//        auto rx = cx + (radiusInner() + radius) * cos(qDegreesToRadians(startAngle() + spanAngle()));
-//        auto ry = cy - (radiusInner() + radius) * sin(qDegreesToRadians(startAngle() + spanAngle()));
-//        path.arcTo(rx - radius, ry - radius,
-//                   radius * 2, radius * 2,
-//                   startAngle() + spanAngle(), -180);
-//    }
+    //    if (roundConer()) {
+    //        //外弧到内弧的圆角
+    //        auto radius = (radiusOuter() - radiusInner()) / 2;
+    //        auto rx = cx + (radiusInner() + radius) * cos(qDegreesToRadians(startAngle() + spanAngle()));
+    //        auto ry = cy - (radiusInner() + radius) * sin(qDegreesToRadians(startAngle() + spanAngle()));
+    //        path.arcTo(rx - radius, ry - radius,
+    //                   radius * 2, radius * 2,
+    //                   startAngle() + spanAngle(), -180);
+    //    }
     //内弧，方向与外弧相反
     path.arcTo(cx - radiusInner(), cy - radiusInner(),
                radiusInner() * 2, radiusInner() * 2,
@@ -188,6 +190,10 @@ void Ringboard::setGradient(Ringboard::Gradient gradient) {
 
 void Ringboard::setlanguage(int language)
 {
+
+    //    sound->stop();//停止
+
+    //    sound->setLoops(value);//设置循环次数
     if (language){
         p_translator = new QTranslator();
         p_translator->load(":/zh_CN.qm");
@@ -199,5 +205,15 @@ void Ringboard::setlanguage(int language)
         mEmptystring = "";
         emit siglanguageChanged();
     }
+}
+
+void Ringboard::soundStrongPlay()
+{
+    soundStrong->play();//播放
+}
+
+void Ringboard::soundWeakPlay()
+{
+    soundWeak->play();//播放
 }
 

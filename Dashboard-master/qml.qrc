@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>zh_CN.qm</file>
+        <file>strongS.wav</file>
+        <file>weakS.wav</file>
     </qresource>
 </RCC>

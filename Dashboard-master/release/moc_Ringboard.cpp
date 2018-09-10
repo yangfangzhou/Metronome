@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Ringboard_t {
-    QByteArrayData data[31];
-    char stringdata0[416];
+    QByteArrayData data[33];
+    char stringdata0[446];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -56,12 +56,14 @@ QT_MOC_LITERAL(21, 280, 13), // "setRoundConer"
 QT_MOC_LITERAL(22, 294, 11), // "setGradient"
 QT_MOC_LITERAL(23, 306, 11), // "setlanguage"
 QT_MOC_LITERAL(24, 318, 8), // "language"
-QT_MOC_LITERAL(25, 327, 11), // "emptystring"
-QT_MOC_LITERAL(26, 339, 10), // "NoGradient"
-QT_MOC_LITERAL(27, 350, 14), // "RadialGradiant"
-QT_MOC_LITERAL(28, 365, 15), // "ConicalGradiant"
-QT_MOC_LITERAL(29, 381, 14), // "LinearGradient"
-QT_MOC_LITERAL(30, 396, 19) // "LinearGradientlight"
+QT_MOC_LITERAL(25, 327, 15), // "soundStrongPlay"
+QT_MOC_LITERAL(26, 343, 13), // "soundWeakPlay"
+QT_MOC_LITERAL(27, 357, 11), // "emptystring"
+QT_MOC_LITERAL(28, 369, 10), // "NoGradient"
+QT_MOC_LITERAL(29, 380, 14), // "RadialGradiant"
+QT_MOC_LITERAL(30, 395, 15), // "ConicalGradiant"
+QT_MOC_LITERAL(31, 411, 14), // "LinearGradient"
+QT_MOC_LITERAL(32, 426, 19) // "LinearGradientlight"
 
     },
     "Ringboard\0startAngleChanged\0\0startAngle\0"
@@ -73,8 +75,9 @@ QT_MOC_LITERAL(30, 396, 19) // "LinearGradientlight"
     "siglanguageChanged\0timeoutSlot\0"
     "setStartAngle\0setSpanAngle\0setRadiusInner\0"
     "setRadiusOuter\0setRoundConer\0setGradient\0"
-    "setlanguage\0language\0emptystring\0"
-    "NoGradient\0RadialGradiant\0ConicalGradiant\0"
+    "setlanguage\0language\0soundStrongPlay\0"
+    "soundWeakPlay\0emptystring\0NoGradient\0"
+    "RadialGradiant\0ConicalGradiant\0"
     "LinearGradient\0LinearGradientlight"
 };
 #undef QT_MOC_LITERAL
@@ -85,31 +88,33 @@ static const uint qt_meta_data_Ringboard[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      15,   14, // methods
-       7,  130, // properties
-       1,  158, // enums/sets
+      17,   14, // methods
+       7,  142, // properties
+       1,  170, // enums/sets
        0,    0, // constructors
        0,       // flags
        7,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   89,    2, 0x06 /* Public */,
-       4,    1,   92,    2, 0x06 /* Public */,
-       6,    1,   95,    2, 0x06 /* Public */,
-       8,    1,   98,    2, 0x06 /* Public */,
-      10,    1,  101,    2, 0x06 /* Public */,
-      12,    1,  104,    2, 0x06 /* Public */,
-      15,    0,  107,    2, 0x06 /* Public */,
+       1,    1,   99,    2, 0x06 /* Public */,
+       4,    1,  102,    2, 0x06 /* Public */,
+       6,    1,  105,    2, 0x06 /* Public */,
+       8,    1,  108,    2, 0x06 /* Public */,
+      10,    1,  111,    2, 0x06 /* Public */,
+      12,    1,  114,    2, 0x06 /* Public */,
+      15,    0,  117,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      16,    0,  108,    2, 0x0a /* Public */,
-      17,    1,  109,    2, 0x0a /* Public */,
-      18,    1,  112,    2, 0x0a /* Public */,
-      19,    1,  115,    2, 0x0a /* Public */,
-      20,    1,  118,    2, 0x0a /* Public */,
-      21,    1,  121,    2, 0x0a /* Public */,
-      22,    1,  124,    2, 0x0a /* Public */,
-      23,    1,  127,    2, 0x0a /* Public */,
+      16,    0,  118,    2, 0x0a /* Public */,
+      17,    1,  119,    2, 0x0a /* Public */,
+      18,    1,  122,    2, 0x0a /* Public */,
+      19,    1,  125,    2, 0x0a /* Public */,
+      20,    1,  128,    2, 0x0a /* Public */,
+      21,    1,  131,    2, 0x0a /* Public */,
+      22,    1,  134,    2, 0x0a /* Public */,
+      23,    1,  137,    2, 0x0a /* Public */,
+      25,    0,  140,    2, 0x0a /* Public */,
+      26,    0,  141,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QReal,    3,
@@ -129,6 +134,8 @@ static const uint qt_meta_data_Ringboard[] = {
     QMetaType::Void, QMetaType::Bool,   11,
     QMetaType::Void, 0x80000000 | 13,   14,
     QMetaType::Void, QMetaType::Int,   24,
+    QMetaType::Void,
+    QMetaType::Void,
 
  // properties: name, type, flags
        3, QMetaType::QReal, 0x00495103,
@@ -137,7 +144,7 @@ static const uint qt_meta_data_Ringboard[] = {
        9, QMetaType::QReal, 0x00495103,
       11, QMetaType::Bool, 0x00495103,
       14, 0x80000000 | 13, 0x0049510b,
-      25, QMetaType::QString, 0x00495001,
+      27, QMetaType::QString, 0x00495001,
 
  // properties: notify_signal_id
        0,
@@ -149,14 +156,14 @@ static const uint qt_meta_data_Ringboard[] = {
        6,
 
  // enums: name, flags, count, data
-      13, 0x0,    5,  162,
+      13, 0x0,    5,  174,
 
  // enum data: key, value
-      26, uint(Ringboard::NoGradient),
-      27, uint(Ringboard::RadialGradiant),
-      28, uint(Ringboard::ConicalGradiant),
-      29, uint(Ringboard::LinearGradient),
-      30, uint(Ringboard::LinearGradientlight),
+      28, uint(Ringboard::NoGradient),
+      29, uint(Ringboard::RadialGradiant),
+      30, uint(Ringboard::ConicalGradiant),
+      31, uint(Ringboard::LinearGradient),
+      32, uint(Ringboard::LinearGradientlight),
 
        0        // eod
 };
@@ -182,6 +189,8 @@ void Ringboard::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 12: _t->setRoundConer((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 13: _t->setGradient((*reinterpret_cast< Gradient(*)>(_a[1]))); break;
         case 14: _t->setlanguage((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 15: _t->soundStrongPlay(); break;
+        case 16: _t->soundWeakPlay(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -295,13 +304,13 @@ int Ringboard::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 15)
+        if (_id < 17)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 15;
+        _id -= 17;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 15)
+        if (_id < 17)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 15;
+        _id -= 17;
     }
 #ifndef QT_NO_PROPERTIES
    else if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty

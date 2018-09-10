@@ -6,6 +6,7 @@
 #include <QQuickPaintedItem>
 #include <QTranslator>
 #include <QDebug>
+#include <QSound>
 
 class Ringboard : public QQuickPaintedItem {
     Q_OBJECT
@@ -69,6 +70,10 @@ public slots:
     void setGradient(Gradient gradient);
 
     void setlanguage(int language);
+
+    void soundStrongPlay();
+
+    void soundWeakPlay();
 signals:
     void startAngleChanged(qreal startAngle);
 
@@ -93,6 +98,7 @@ private:
     QList<QColor> mColors;
     Gradient mGradient = NoGradient;
     QTranslator *p_translator;
-
+    QSound *soundStrong;
+    QSound *soundWeak;
 };
 
